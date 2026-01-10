@@ -334,7 +334,7 @@ pipeline {
                         }
                         
                         // Archive Trivy reports as artifacts
-                        archiveArtifacts artifacts: 'CONTAINER_SCAN_reports/trivy-report.json, CONTAINER_SCAN_reports/trivy-results.txt', fingerprint: true
+                        archiveArtifacts artifacts: 'CONTAINER_SCAN_reports/trivy-report.json, CONTAINER_SCAN_reports/trivy-results.txt, CONTAINER_SCAN_reports/sbom-cyclonedx.json,', fingerprint: true
                         
                         echo "=== Trivy Scan Results ==="
                         echo "Total vulnerabilities found: ${vulnerabilityCount}"
