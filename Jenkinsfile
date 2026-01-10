@@ -51,7 +51,7 @@ pipeline {
                             # Scanning source code (./src folder only)
                             docker run --rm -v "$(pwd)/src:/src:ro" \\
                                             -v "$(pwd):/results" \\
-                                returntocorp/semgrep:latest \\
+                                semgrep/semgrep:latest \\
                                 semgrep scan \\
                                 --config=auto \\
                                 --json \\
