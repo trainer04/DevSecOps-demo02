@@ -295,6 +295,20 @@ pipeline {
                                 ${updateFlags} \\
                                 --cache-dir /root/.cache/trivy \\
                                 ${BUILD_TAG}
+                        
+                            # Generate SBOM in CycloneDX format
+                            docker run --rm \\
+                                -v /var/run/docker.sock:/var/run/docker.sock \\
+                                -v "\$(pwd)/CONTAINER_SCAN_reports:/output" \\
+                                -v "${HOME}/.trivy_cache:/root/.cache/trivy" \\
+                                aquasec/trivy:latest \\
+                                image \\
+                                --format cyclonedx \\
+                                --output /output/sbom-cyclonedx.json \\
+                                --timeout 30m \\
+                                ${updateFlags} \\
+                                --cache-dir /root/.cache/trivy \\
+                                ${BUILD_TAG}
                         """
                         
                         // Read and analyze the JSON report
